@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :submissions
+  devise_for :users
+
+  #root 'static_pages#index'
+  authenticated do
+    root :to => 'submissions#index', as: :authenticated
+  end
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
